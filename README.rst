@@ -22,7 +22,8 @@ Supported keys are:
 Usage:
 ------
 
-.. code-block:: python
+.. code:: python
+
     import osxmmkeys
 
     def play_pause():
