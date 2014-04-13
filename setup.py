@@ -6,7 +6,7 @@ packages = [
 
 setup(
     name='osxmmkeys',
-    version='0.0.1',
+    version='0.0.2',
     description='Easily handle media keys on OS X.',
     long_description=open('README.rst').read(),
     author='Justin Li',
@@ -14,8 +14,8 @@ setup(
     url='https://github.com/pushrax/osxmmkeys',
     license='MIT',
     packages=packages,
+    package_data={'': ['LICENSE']},
     include_package_data=True,
-    package_data={'': ['README.rst']},
     classifiers=[
         'Development Status :: 4 - Beta',
         'Environment :: MacOS X',
