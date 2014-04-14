@@ -51,6 +51,7 @@ class Tap(threading.Thread):
     def stop(self):
         Quartz.CFRunLoopStop(self.loop_ref)
         Quartz.CFRelease(self.loop_ref)
+        self.join()
 
     def _handle_event_tap(self, proxy, cg_event_type, cg_event, refcon):
         ns_event = AppKit.NSEvent.eventWithCGEvent_(cg_event)
