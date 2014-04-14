@@ -1,8 +1,9 @@
 import AppKit
 import Quartz
+import threading
 
 
-class Tap(object):
+class Tap(threading.Thread):
     MEDIA_EVENT_SUBTYPE = 8
     KEY_CODES = {
         16: 'play_pause',
@@ -19,6 +20,7 @@ class Tap(object):
 
     def __init__(self):
         self._handlers = {key: [] for code, key in self.KEY_CODES.items()}
+        super(Tap, self).__init__()
 
     def on(self, event, handler):
         self._handlers[event].append(handler)
@@ -40,8 +42,15 @@ class Tap(object):
             Quartz.kCFRunLoopDefaultMode,
         )
 
+        self.loop_ref = Quartz.CFRunLoopGetCurrent()
+        Quartz.CFRetain(self.loop_ref)
+
         Quartz.CGEventTapEnable(tap, True)
-        Quartz.CFRunLoopRun()  # Never returns.
+        Quartz.CFRunLoopRun()  # Only returns after stop() is called.
+
+    def stop(self):
+        Quartz.CFRunLoopStop(self.loop_ref)
+        Quartz.CFRelease(self.loop_ref)
 
     def _handle_event_tap(self, proxy, cg_event_type, cg_event, refcon):
         ns_event = AppKit.NSEvent.eventWithCGEvent_(cg_event)
