@@ -6,7 +6,7 @@ packages = [
 
 setup(
     name='osxmmkeys',
-    version='0.0.2',
+    version='0.0.3',
     description='Easily handle media keys on OS X.',
     long_description=open('README.rst').read(),
     author='Justin Li',

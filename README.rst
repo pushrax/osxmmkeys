@@ -3,8 +3,8 @@ osxmmkeys
 =========
 
 osxmmkeys is a simple Python library for handling media keys on OS X.
-Keys can be observed with no side effects, or have their default behaviours
-overridden entirely.
+Key presses can be observed with no side effects, or have their default
+behaviours overridden entirely.
 
 Installation
 ------------
