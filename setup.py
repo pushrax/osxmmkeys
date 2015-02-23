@@ -4,9 +4,13 @@ packages = [
     'osxmmkeys',
 ]
 
+requires = [
+    'pyobjc',
+]
+
 setup(
     name='osxmmkeys',
-    version='0.0.3',
+    version='0.0.4',
     description='Easily handle media keys on OS X.',
     long_description=open('README.rst').read(),
     author='Justin Li',
@@ -14,6 +18,7 @@ setup(
     url='https://github.com/pushrax/osxmmkeys',
     license='MIT',
     packages=packages,
+    install_requires=requires,
     package_data={'': ['LICENSE']},
     include_package_data=True,
     classifiers=[
