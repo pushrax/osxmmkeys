@@ -7,6 +7,8 @@ class Tap(threading.Thread):
     MEDIA_EVENT_SUBTYPE = 8
     KEY_CODES = {
         16: 'play_pause',
+        17: 'next_track',
+        18: 'prev_track',
         19: 'next_track',
         20: 'prev_track',
         7: 'mute',
