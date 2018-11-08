@@ -13,13 +13,7 @@ To install osxmmkeys with pip, use:
 
 .. code:: bash
 
-    $ pip install pyobjc-core
     $ pip install osxmmkeys
-
-The extra install command is due to an issue_ in pyobjc.
-It will work without it, but will be quite a bit slower.
-
-.. _issue: https://bitbucket.org/ronaldoussoren/pyobjc/issue/21
 
 Usage
 -----
