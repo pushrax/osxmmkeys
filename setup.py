@@ -10,7 +10,7 @@ requires = [
 
 setup(
     name='osxmmkeys',
-    version='0.0.4',
+    version='1.0.0',
     description='Easily handle media keys on OS X.',
     long_description=open('README.rst').read(),
     author='Justin Li',
@@ -22,7 +22,7 @@ setup(
     package_data={'': ['LICENSE']},
     include_package_data=True,
     classifiers=[
-        'Development Status :: 4 - Beta',
+        'Development Status :: 5 - Production/Stable',
         'Environment :: MacOS X',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: MIT License',
