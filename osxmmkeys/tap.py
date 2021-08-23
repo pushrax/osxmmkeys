@@ -28,7 +28,7 @@ class Tap(threading.Thread):
         self._handlers[event].append(handler)
 
     def run(self):
-        tap = Quartz.CGEventTapCreate(
+        self._tap = Quartz.CGEventTapCreate(
             Quartz.kCGSessionEventTap,
             Quartz.kCGHeadInsertEventTap,
             Quartz.kCGEventTapOptionDefault,
@@ -37,7 +37,7 @@ class Tap(threading.Thread):
             None
         )
 
-        loop_source = Quartz.CFMachPortCreateRunLoopSource(None, tap, 0)
+        loop_source = Quartz.CFMachPortCreateRunLoopSource(None, self._tap, 0)
         Quartz.CFRunLoopAddSource(
             Quartz.CFRunLoopGetCurrent(),
             loop_source,
@@ -47,7 +47,7 @@ class Tap(threading.Thread):
         self.loop_ref = Quartz.CFRunLoopGetCurrent()
         Quartz.CFRetain(self.loop_ref)
 
-        Quartz.CGEventTapEnable(tap, True)
+        Quartz.CGEventTapEnable(self._tap, True)
         Quartz.CFRunLoopRun()  # Only returns after stop() is called.
 
     def stop(self):
@@ -56,6 +56,10 @@ class Tap(threading.Thread):
         self.join()
 
     def _handle_event_tap(self, proxy, cg_event_type, cg_event, refcon):
+        # re-enable the tap on timeout
+        if cg_event_type == Quartz.kCGEventTapDisabledByTimeout:
+            Quartz.CGEventTapEnable(self._tap, True)
+            return cg_event
         ns_event = AppKit.NSEvent.eventWithCGEvent_(cg_event)
         if not self._handle_event(ns_event):
             return cg_event  # Allow event to propagate.
